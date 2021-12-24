@@ -1,0 +1,35 @@
+###### The metrics to evaluate the performance of methods
+##### FDR, TDR and MCC
+#### FDR #####
+fdr <- function(nt,nc){
+  if(nt>0){
+    if(nc>=1){
+      FDR <- (nt-nc)/nt
+    }else{ 
+      FDR <- 1
+    }
+  }else{
+    FDR <- 0
+  }
+  return(FDR)
+}
+
+#### TDR ####
+tdr <- function(nc){
+  TDR <- nc/n_causal
+  return(TDR)
+}
+
+#### MCC ####
+mcc <- function(nall,nt,nc){
+  TP <- nc
+  TN <- nall-nt-n_causal+nc
+  FP <- nt-nc
+  FN <- n_causal-nc
+  if((TP+FP)*(TP+FN)*(TN+FP)*(TN+FN)!=0){
+    MCC <- (TP*TN-FP*FN)/((TP+FP)*(TP+FN)*(TN+FP)*(TN+FN))^(1/2)
+  }  else{
+    MCC <- 0
+  }
+  return(MCC)
+}
