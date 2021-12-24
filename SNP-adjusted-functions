@@ -252,40 +252,6 @@ simulation <- function(data_s,fmly){
     nc_mul_c <- sum(c_snp %in% name_snp3_c)
     m_time_c <- m_time_c-1
     endtime_c <- proc.time()
-    # ### stepwise algorithm
-    # data_s3 <- data.frame(data_s2,outcome_y)
-    # ### both
-    # starttime_both <- proc.time()
-    # fit3 <- glm(outcome_y~.,data = data_s3,family = fmly)
-    # slm_both <- step(fit3,direction = 'both')
-    # name_step_both <- names(slm_both$coef)[-1][summary(slm_both)$coef[-1,4]<p_value1]
-    # nt_step_both <- length(name_step_both)
-    # nc_step_both <- sum(c_snp %in% name_step_both)
-    # endtime_both <- proc.time()
-    # ### backward
-    # starttime_back <- proc.time()
-    # forml <- paste(name_snp,collapse = '+')
-    # forml0 <- paste0('outcome_y~',forml)
-    # fit4 <- glm(as.formula(forml0),data = data_s3,family = fmly)
-    # slm_back <- step(fit4,direction = 'backward')
-    # name_step_back <- names(slm_back$coef)[-1][summary(slm_back)$coef[-1,4]<p_value1]
-    # nt_step_back <- length(name_step_back)
-    # nc_step_back <- sum(c_snp %in% name_step_back)
-    # endtime_back <- proc.time()
-    # ### forward
-    # starttime_for <- proc.time()
-    # forml1 <- paste0('~',forml)
-    # fit5 <- glm(outcome_y~1,data = data_s3,family = fmly)
-    # slm_for <- step(fit5,scope = list(upper=as.formula(forml1),lower=~1),direction = 'forward')
-    # name_step_for <- names(slm_for$coef)[-1][summary(slm_for)$coef[-1,4]<p_value1]
-    # nt_step_for <- length(name_step_for)
-    # nc_step_for <- sum(c_snp %in% name_step_for)
-    # endtime_for <- proc.time()
-    time_s <- (endtime_s - starttime_s)[3]
-    time_c <- (endtime_c - starttime_c)[3]
-    # time_both <- as.numeric(endtime_both - starttime_both)
-    # time_back <- as.numeric(endtime_back - starttime_back)
-    # time_for <- as.numeric(endtime_for - starttime_for)
   }else{
     time_s <- 0
     time_c <- 0
@@ -300,12 +266,6 @@ simulation <- function(data_s,fmly){
     nc_mul2_c=nc_uni
     nt_mul_c=nt_uni
     nc_mul_c=nc_uni
-    # nt_step_both=nt_uni
-    # nc_step_both=nc_uni
-    # nt_step_back=nt_uni
-    # nc_step_back=nc_uni
-    # nt_step_for=nt_uni
-    # nc_step_for=nc_uni
     m_time=1
     m_time_c=1
   }
@@ -329,25 +289,6 @@ simulation <- function(data_s,fmly){
   MCC_mul <- mcc(nall=nnt,nt=nt_mul,nc=nc_mul)
   MCC_mul2_c <- mcc(nall=nnt,nt=nt_mul2_c,nc=nc_mul2_c)
   MCC_mul_c <- mcc(nall=nnt,nt=nt_mul_c,nc=nc_mul_c)
-  # FDR_both <- fdr(nt=nt_step_both,nc=nc_step_both)
-  # FDR_back <- fdr(nt=nt_step_back,nc=nc_step_back)
-  # FDR_for <- fdr(nt=nt_step_for,nc=nc_step_for)
-  # TDR_both <- tdr(nc=nc_step_both)
-  # TDR_back <- tdr(nc=nc_step_back)
-  # TDR_for <- tdr(nc=nc_step_for)
-  # MCC_both <- mcc(nall=nnt,nt=nt_step_both,nc=nc_step_both)
-  # MCC_back <- mcc(nall=nnt,nt=nt_step_back,nc=nc_step_back)
-  # MCC_for <- mcc(nall=nnt,nt=nt_step_for,nc=nc_step_for)
-  
-  # result <- c(nt_uni,nc_uni,nt_uni_1,nc_uni_1,nt_mul2,nc_mul2,nt_mul,nc_mul,nt_mul2_c,nc_mul2_c,nt_mul_c,nc_mul_c,nt_step_both,nc_step_both,nt_step_back,nc_step_back,
-  #             nt_step_for,nc_step_for,FDR_uni,FDR_uni_1,FDR_mul2,FDR_mul,FDR_mul2_c,FDR_mul_c,FDR_both,FDR_back,FDR_for,TDR_uni,TDR_uni_1,TDR_mul2,TDR_mul,TDR_mul2_c,TDR_mul_c,
-  #             TDR_both,TDR_back,TDR_for,MCC_uni,MCC_uni_1,MCC_mul2,MCC_mul,MCC_mul2_c,MCC_mul_c,MCC_both,MCC_back,MCC_for,m_time,m_time_c,
-  #             time_uni,time_s,time_c,time_both,time_back,time_for,N1)
-  # 
-  # names(result) <-  c('nt_uni','nc_uni','nt_uni_1','nc_uni_1','nt_mul2','nc_mul2','nt_mul','nc_mul','nt_mul2_c','nc_mul2_c','nt_mul_c','nc_mul_c','nt_step_both','nc_step_both','nt_step_back','nc_step_back',
-  #                     'nt_step_for','nc_step_for','FDR_uni','FDR_uni_1','FDR_mul2','FDR_mul','FDR_mul2_c','FDR_mul_c','FDR_both','FDR_back','FDR_for','TDR_uni','TDR_uni_1','TDR_mul2','TDR_mul','TDR_mul2_c','TDR_mul_c',
-  #                     'TDR_both','TDR_back','TDR_for','MCC_uni','MCC_uni_1','MCC_mul2','MCC_mul','MCC_mul2_c','MCC_mul_c','MCC_both','MCC_back','MCC_for','m_time','m_time_c',
-  #                     'time_uni','time_s','time_c','time_both','time_back','time_for','N1')
   result <- c(nt_uni,nc_uni,nt_uni_1,nc_uni_1,nt_mul2,nc_mul2,nt_mul,nc_mul,nt_mul2_c,nc_mul2_c,nt_mul_c,nc_mul_c,
               FDR_uni,FDR_uni_1,FDR_mul2,FDR_mul,FDR_mul2_c,FDR_mul_c,TDR_uni,TDR_uni_1,TDR_mul2,TDR_mul,TDR_mul2_c,TDR_mul_c,
               MCC_uni,MCC_uni_1,MCC_mul2,MCC_mul,MCC_mul2_c,MCC_mul_c,m_time,m_time_c,
