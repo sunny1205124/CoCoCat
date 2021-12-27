@@ -11,3 +11,8 @@ library(CoCoCat)
 ```
 Please do not hesitate to contact me (xrsun@mail.sdu.edu.cn) if you meet any problem. Suggestions or comments are also welcome.
 
+### A fast example to run the code
+```{r}      
+dt_fm <- read.csv('sampledata/SampleData.csv')
+causalSNP <- CGWAS(data0=dt_fm, Pvalue=0.05, family0='gaussian')
+```
