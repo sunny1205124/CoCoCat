@@ -5,7 +5,7 @@ Although the genome-wide association study (GWAS) has identified thousands of re
 ### How to install and load this package
 ```{r}      
 library(devtools) 
-install_github("sunny1205124/CoCoCat")
+install_github("sunny1205124/CoCoCat/CoCoCat")
 library(CoCoCat)
 ?CoCoCat  # manual of CoCoCat package
 ```
